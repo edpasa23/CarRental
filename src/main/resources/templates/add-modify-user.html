@@ -6,37 +6,40 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<h2>User Data</h2>
-<a th:href="@{/}">Back</a>
+<header th:replace="layout/base-template :: header"/>
+<h2>[[#{modify-add.title}]]</h2>
+<a th:href="@{/usersList}">[[#{action.back}]]</a>
 <br/>
-<form th:action="@{/save}" method="post" th:object="${user}">
+<form th:action="@{/saveUser}" method="post" th:object="${user}">
     <input type="hidden" name="userId" th:field="*{userId}"/>
     <br/>
-    <label for="name">Name:</label>
+    <label for="name">[[#{user.name}]]:</label>
     <input type="text" name="name"th:field="*{name}"/>
     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
     <br/>
-    <label for="lastName">Last Name:</label>
+    <label for="lastName">[[#{user.last-name}]]:</label>
     <input type="text" name="lastName" th:field="*{lastName}"/>
     <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
     <br/>
-    <label for="address">Address:</label>
+    <label for="address">[[#{user.address}]]:</label>
     <input type="text" name="address" th:field="*{address}"/>
     <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</span>
     <br/>
-    <label for="city">City:</label>
+    <label for="city">[[#{user.city}]]:</label>
     <input type="text" name="city" th:field="*{city}"/>
     <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</span>
     <br/>
-    <label for="phone">Phone:</label>
+    <label for="phone">[[#{user.phone}]]:</label>
     <input type="tel" name="phone" th:field="*{phone}"/>
     <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</span>
     <br/>
-    <label for="email">Email:</label>
+    <label for="email">[[#{user.email}]]:</label>
     <input type="text" name="email"  th:field="*{email}"/>
     <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
-    <input type="submit" name="save" value="Save"/>
+    <input type="submit" name="saveUser" value="Save"/>
 </form>
+
+<footer th:replace="layout/base-template :: footer"/>
 
 </body>
 </html>

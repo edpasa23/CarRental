@@ -19,25 +19,39 @@ public class ControllerCarRental {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("/usersList")
     public String viewUsers(Model model){
         List<User> clientsList = userService.listAll();
         model.addAttribute("userList",clientsList);
-        return "index";
+        return "user-list";
     }
 
-    @GetMapping("/add")
-    public String add(User user){
-        return "add-client";
+    @GetMapping("/addUser")
+    public String addUser(User user){
+        return "add-modify-user";
     }
 
-    @PostMapping("/save")
-    public String save(@Valid User user, Errors error){
+    @GetMapping("/editUser")
+    public String editUser(User user,Model model){
+        user = userService.findUser(user);
+        model.addAttribute("user", user);
+        return "add-modify-user";
+    }
+
+    @GetMapping("/deleteUser")
+    public String deleteUser(User user){
+        userService.delete(user);
+        return "redirect:/usersList";
+    }
+
+    @PostMapping("/saveUser")
+    public String saveUser(@Valid User user, Errors error){
         if(error.hasErrors()){
-            return "add-client";
+            return "add-modify-user";
         }
         userService.save(user);
-        return "redirect:/";
+        return "redirect:/usersList";
     }
+
 
 }

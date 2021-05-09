@@ -3,39 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Cars Rental</title>
     <meta charset="UTF-8">
-    <title>Users</title>
 </head>
 <body>
-<div align="center">
-    <h1>User List</h1>
-    <a th:href="@{/add}">Add User</a>
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Id Client</th>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Address</th>
-            <th>City</th>
-            <th>Phone</th>
-            <th>Email</th>
-        </tr>
-        </thead>
-        <tbody>
 
-        <tr th:each="user : ${userList}">
-            <td th:text="${user.userId}">ID Client</td>
-            <td th:text="${user.name}">Name</td>
-            <td th:text="${user.lastName}">Last Name</td>
-            <td th:text="${user.address}">Address</td>
-            <td th:text="${user.city}">City</td>
-            <td th:text="${user.phone}">Phone</td>
-            <td th:text="${user.email}">Email</td>
-        </tr>
-        </tbody>
-    </table>
+<header th:replace="layout/base-template :: header"/>
+
+<div align="center">
+    <h1>Options</h1>
+    <a th:href="@{/usersList}">[[#{user.list}]]</a>
+    <br/>
 </div>
+
+<footer th:replace="layout/base-template :: footer"/>
+
 </body>
 </html>

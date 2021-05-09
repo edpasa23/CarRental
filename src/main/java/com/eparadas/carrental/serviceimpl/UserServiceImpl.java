@@ -18,22 +18,24 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public List<User> listAll() {
-        return userRepository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 
     @Override
+    @Transactional
     public void save(User user) {
         userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public void delete(User user) {
         userRepository.delete(user);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User findClient(User user) {
+    public User findUser(User user) {
         return userRepository.findById(user.getUserId()).orElse((null));
     }
 }

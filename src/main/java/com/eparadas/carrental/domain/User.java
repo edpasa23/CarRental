@@ -36,7 +36,7 @@ public class User implements Serializable {
     private String passwordConfirm;
 */
 
-    @NotEmpty(message = "*Please provide a name")
+    @NotEmpty
     @Column(name = "name")
     private String name;
 

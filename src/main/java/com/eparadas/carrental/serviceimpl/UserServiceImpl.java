@@ -1,19 +1,50 @@
 package com.eparadas.carrental.serviceimpl;
 
+import com.eparadas.carrental.domain.Role;
 import com.eparadas.carrental.domain.User;
 import com.eparadas.carrental.repository.UserRepository;
 import com.eparadas.carrental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
-@Service
-public class UserServiceImpl implements UserService {
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Service("userDetailsService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    //Methods for Login
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+
+        if(user == null){
+            throw new UsernameNotFoundException(username);
+        }
+
+        Set<GrantedAuthority> grantedAuthoritySet = new HashSet<>();
+
+        for(Role role : user.getRole()){
+            grantedAuthoritySet.add(new SimpleGrantedAuthority(role.getName()));
+        }
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),grantedAuthoritySet);
+
+    }
+
+    //
 
     @Override
     @Transactional(readOnly = true)

@@ -23,17 +23,19 @@ public class User implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
-/*    @NotEmpty(message = "*Please provide a username")
+    @NotEmpty(message = "*Please provide a username")
     @Column(name = "username")
     private String username;
 
     @NotEmpty(message = "*Please provide a password")
     @Column(name = "password")
     private String password;
+/*
 
     @NotEmpty(message = "*Please provide a password")
     @Column(name = "passwordConfirm")
-    private String passwordConfirm;*/
+    private String passwordConfirm;
+*/
 
     @NotEmpty
     @Column
@@ -61,10 +63,11 @@ public class User implements Serializable {
     @Email
     private String email;
 
-/*    @OneToMany
+    @OneToMany
     @JoinColumn(name = "user_id")
     private Set<Role> role;
 
+    /*
     @OneToOne
     @JoinColumn(name = "user_id")
     private Set<Booking> booking;*/

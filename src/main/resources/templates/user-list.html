@@ -1,7 +1,8 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
@@ -13,7 +14,7 @@
 
 <div align="center">
     <h2>[[#{user.list}]]</h2>
-    <a th:href="@{/addUser}">[[#{user.add}]]</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/addUser}">[[#{user.add}]]</a>
     <br/><br/>
 
     <table border="1" cellpadding="10">
@@ -26,8 +27,8 @@
             <th>[[#{user.city}]]</th>
             <th>[[#{user.phone}]]</th>
             <th>[[#{user.email}]]</th>
-            <th>[[#{action.edit}]]</th>
-            <th>[[#{action.delete}]]</th>
+            <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.edit}]]</th>
+            <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.delete}]]</th>
         </tr>
         </thead>
         <tbody>
@@ -40,8 +41,8 @@
             <td th:text="${user.city}">City</td>
             <td th:text="${user.phone}">Phone</td>
             <td th:text="${user.email}">Email</td>
-            <td><a th:href="@{/editUser(userId=${user.userId})}" th:text="Edit"/></td>
-            <td><a th:href="@{/deleteUser(userId=${user.userId})}" th:text="Delete"/></td>
+            <td sec:authorize="hasRole('ROLE_ADMIN')"><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editUser(userId=${user.userId})}" th:text="Edit"/></td>
+            <td sec:authorize="hasRole('ROLE_ADMIN')"><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/deleteUser(userId=${user.userId})}" th:text="Delete"/></td>
         </tr>
         </tbody>
     </table>

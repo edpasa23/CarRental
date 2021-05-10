@@ -1,8 +1,10 @@
 package com.eparadas.carrental.web;
 
+
 import com.eparadas.carrental.domain.User;
 import com.eparadas.carrental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,6 +20,16 @@ public class ControllerCarRental {
 
     @Autowired
     private UserService userService;
+
+
+/*
+    para poder ver quien hizo login
+    @GetMapping("/usersList")
+    public String viewUsers(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User userDetails){
+        List<User> clientsList = userService.listAll();
+        model.addAttribute("userList",clientsList);
+        return "user-list";
+    }*/
 
     @GetMapping("/usersList")
     public String viewUsers(Model model){

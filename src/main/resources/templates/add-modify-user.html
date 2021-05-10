@@ -36,6 +36,10 @@
     <label for="email">[[#{user.email}]]:</label>
     <input type="text" name="email"  th:field="*{email}"/>
     <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+    <br/>
+    <div th:if="${#fields.hasErrors('global')}">
+        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+    </div>
     <input type="submit" name="saveUser" value="Save"/>
 </form>
 

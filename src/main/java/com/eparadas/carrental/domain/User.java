@@ -1,6 +1,7 @@
 package com.eparadas.carrental.domain;
 
 import lombok.Data;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -22,8 +23,7 @@ public class User implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
-/*
-    @NotEmpty(message = "*Please provide a username")
+/*    @NotEmpty(message = "*Please provide a username")
     @Column(name = "username")
     private String username;
 
@@ -33,32 +33,32 @@ public class User implements Serializable {
 
     @NotEmpty(message = "*Please provide a password")
     @Column(name = "passwordConfirm")
-    private String passwordConfirm;
-*/
+    private String passwordConfirm;*/
 
     @NotEmpty
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @NotEmpty(message = "*Please provide a last name")
+    @NotEmpty
     @Column(name = "last_name")
     private String lastName;
 
-    @NotEmpty(message = "*Please provide a address")
+    @NotEmpty
     @Column(name = "address")
     private String address;
 
-    @NotEmpty(message = "*Please provide a city")
+    @NotEmpty
     @Column(name = "city")
     private String city;
 
-    @NotEmpty(message = "*Please provide a phone")
+    @NotEmpty
     @Column(unique = true,name = "phone")
+    @NumberFormat
     private String phone;
 
-    @NotEmpty(message = "*Please provide a email")
+    @NotEmpty
     @Column(unique = true, name = "email")
-    @Email(message = "*Please provide a email")
+    @Email
     private String email;
 
 /*    @OneToMany

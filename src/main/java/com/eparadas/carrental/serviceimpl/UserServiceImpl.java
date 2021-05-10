@@ -35,7 +35,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User findUser(User user) {
+    public User findUserById(User user) {
         return userRepository.findById(user.getUserId()).orElse((null));
     }
+
+    @Transactional(readOnly = true)
+    public User findUserByEmail(User user) {
+        User userAux = userRepository.findByEmail(user.getEmail());
+        return userAux;
+    }
+
+    @Transactional(readOnly = true)
+    public User findUserByPhone(User user) {
+        User userAux = userRepository.findByPhone(user.getPhone());
+        return userAux;
+    }
+
 }

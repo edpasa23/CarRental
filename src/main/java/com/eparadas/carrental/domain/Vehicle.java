@@ -36,6 +36,14 @@ public class Vehicle implements Serializable {
     private String colour;
 
     @NotEmpty
+    @Column(name = "vehicle_type")
+    private String vehicleType;
+
+    @NotEmpty
+    @Column(name = "transmission")
+    private String transmission;
+
+    @NotEmpty
     @Column(name = "rent_price")
     private String rentPrice;
 

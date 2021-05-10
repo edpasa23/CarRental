@@ -11,6 +11,10 @@ public interface UserService {
 
     public void delete(User user);
 
-    public User findUser(User user);
+    public User findUserById(User user);
+
+    public User findUserByEmail(User user);
+
+    public User findUserByPhone(User user);
 
 }

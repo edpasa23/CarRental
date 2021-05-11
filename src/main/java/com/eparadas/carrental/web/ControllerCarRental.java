@@ -86,8 +86,11 @@ public class ControllerCarRental {
         if (!err.isEmpty()) {
             ObjectError validationError = new ObjectError("globalError", err);
             result.addError(validationError);
+            System.out.println("\n\nAQUIIIII HAY ERROOR\n\n");
         }
         if (error.hasErrors()) {
+            System.out.println("\n\nAQUIIIII HAY ERROORx2\n\n");
+            System.out.println(error.toString());
             return "add-modify-user";
         }
         userService.save(user);

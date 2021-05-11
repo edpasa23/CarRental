@@ -3,50 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+
+<head th:replace="layout/base-template :: head">
     <meta charset="UTF-8">
     <title>Users</title>
 </head>
 <body>
 
 <header th:replace="layout/base-template :: header"/>
+<section th:replace="layout/add-client-button :: add-client-button"></section>
+<section th:replace="layout/users-list :: users-list"></section>
 
-
-<div align="center">
-    <h2>[[#{user.list}]]</h2>
-    <a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/addUser}">[[#{user.add}]]</a>
-    <br/><br/>
-
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>[[#{user.id-client}]]</th>
-            <th>[[#{user.name}]]</th>
-            <th>[[#{user.last-name}]]</th>
-            <th>[[#{user.address}]]</th>
-            <th>[[#{user.city}]]</th>
-            <th>[[#{user.phone}]]</th>
-            <th>[[#{user.email}]]</th>
-            <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.edit}]]</th>
-            <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.delete}]]</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr th:each="user : ${userList}">
-            <td th:text="${user.userId}">ID Client</td>
-            <td th:text="${user.name}">Name</td>
-            <td th:text="${user.lastName}">Last Name</td>
-            <td th:text="${user.address}">Address</td>
-            <td th:text="${user.city}">City</td>
-            <td th:text="${user.phone}">Phone</td>
-            <td th:text="${user.email}">Email</td>
-            <td sec:authorize="hasRole('ROLE_ADMIN')"><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editUser(userId=${user.userId})}" th:text="Edit"/></td>
-            <td sec:authorize="hasRole('ROLE_ADMIN')"><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/deleteUser(userId=${user.userId})}" th:text="Delete"/></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 <br/>
 <a th:href="@{/}">[[#{action.back}]]</a>
 <br/>

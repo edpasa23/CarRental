@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Listado Clientes</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<section th:fragment="users-list" id="users">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>[[#{user.list}]]</h4>
+                    </div>
+                    <div th:if="${userList != null and !userList.empty}">
+                        <table class="table table-stryped">
+                            <thead class="thead-dark">
+                            <tr>
+
+                                <th>#</th>
+                                <th th:text="#{user.name}">Name</th>
+                                <th th:text="#{user.username}">Username</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user, counter : ${userList}">
+                                <td>[[${counter.count}]]</td>
+                                <td>[[${user.name} + ' ' + ${user.lastName}]] </td>
+                                <td>[[${user.username}]]</td>
+                                <td>
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editUser(userId=${user.userId})}"
+                                       class="btn btn-secondary">
+                                        <i class="fas fa-angle-double-right"></i> [[#{action.edit}]]
+                                    </a>
+                                </td>
+                                <td>
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/deleteUser(userId=${user.userId})}"
+                                       class="btn btn-dark">
+                                        <i class="fas fa-trash"></i> [[' ' + #{action.delete}]]
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center p-2" th:if="${userList == null or userList.empty}">
+                        <span th:text="#{user.empty-list}">Empty List</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

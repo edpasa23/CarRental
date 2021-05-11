@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="layout/base-template :: head">
     <title>Add User</title>
     <meta charset="UTF-8">
 </head>
@@ -12,6 +12,10 @@
 <br/>
 <form th:action="@{/saveUser}" method="post" th:object="${user}">
     <input type="hidden" name="userId" th:field="*{userId}"/>
+    <br/>
+    <input type="hidden" name="username" th:field="*{username}"/>
+    <br/>
+    <input type="hidden" name="password" th:field="*{password }"/>
     <br/>
     <label for="name">[[#{user.name}]]:</label>
     <input type="text" name="name"th:field="*{name}"/>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="layout/base-template :: head">
     <title>Add User</title>
     <meta charset="UTF-8">
 </head>
@@ -51,6 +51,6 @@
     <br/>
     <input type="submit" name="signUp" value="Sign up"/>
 </form>
-
+<footer th:replace="layout/base-template :: footer"/>
 </body>
 </html>

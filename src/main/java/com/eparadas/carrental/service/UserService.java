@@ -17,4 +17,10 @@ public interface UserService {
 
     public User findUserByPhone(User user);
 
+    public User findUserByUsername(User user);
+
+    public void register(User user);
+
+
+
 }

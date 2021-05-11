@@ -2,6 +2,7 @@ package com.eparadas.carrental.serviceimpl;
 
 import com.eparadas.carrental.domain.Role;
 import com.eparadas.carrental.domain.User;
+import com.eparadas.carrental.repository.RoleRepository;
 import com.eparadas.carrental.repository.UserRepository;
 import com.eparadas.carrental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service("userDetailsService")
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -24,9 +24,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
     //Methods for Login
 
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
 
@@ -34,7 +41,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
 
-        Set<GrantedAuthority> grantedAuthoritySet = new HashSet<>();
+        ArrayList grantedAuthoritySet = new ArrayList<GrantedAuthority>();
 
         for(Role role : user.getRole()){
             grantedAuthoritySet.add(new SimpleGrantedAuthority(role.getName()));
@@ -60,6 +67,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
+    public void register(User user) {
+
+        //Encripta password
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+        //Guarda el rol nuevo
+        Role roleAux = new Role();
+        roleAux.setName("ROLE_USER");
+        roleRepository.save(roleAux);
+
+        //
+        ArrayList roles = new ArrayList<GrantedAuthority>();
+        roles.add(roleAux);
+        user.setRole(roles);
+        userRepository.save(user);
+
+    }
+
+    @Override
+    @Transactional
     public void delete(User user) {
         userRepository.delete(user);
     }
@@ -69,16 +96,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User findUserById(User user) {
         return userRepository.findById(user.getUserId()).orElse((null));
     }
-
+    @Override
     @Transactional(readOnly = true)
     public User findUserByEmail(User user) {
         User userAux = userRepository.findByEmail(user.getEmail());
         return userAux;
     }
 
+    @Override
     @Transactional(readOnly = true)
     public User findUserByPhone(User user) {
         User userAux = userRepository.findByPhone(user.getPhone());
+        return userAux;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public User findUserByUsername(User user) {
+        User userAux = userRepository.findByUsername(user.getUsername());
         return userAux;
     }
 

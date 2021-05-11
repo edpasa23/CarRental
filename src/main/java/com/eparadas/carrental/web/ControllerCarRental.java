@@ -43,9 +43,23 @@ public class ControllerCarRental {
         return "user-list";
     }
 
-    @GetMapping("/addUser")
-    public String addUser(User user){
-        return "add-modify-user";
+    @GetMapping("createAccount")
+    public String createAccount(User user){
+        return "create-account";
+    }
+
+    @PostMapping("/signUp")
+    public String signUp(@Valid User user, BindingResult result, Errors error) {
+        String err = userValidationService.validateUser(user);
+        if (!err.isEmpty()) {
+            ObjectError validationError = new ObjectError("globalError", err);
+            result.addError(validationError);
+        }
+        if (error.hasErrors()) {
+            return "create-account";
+        }
+        userService.register(user);
+        return "redirect:/login";
     }
 
     @GetMapping("/editUser")
@@ -61,9 +75,13 @@ public class ControllerCarRental {
         return "redirect:/usersList";
     }
 
+    @GetMapping("/addUser")
+    public String addUser(User user){
+        return "add-modify-user";
+    }
+
     @PostMapping("/saveUser")
     public String saveUser(@Valid User user, BindingResult result, Errors error) {
-
         String err = userValidationService.validateUser(user);
         if (!err.isEmpty()) {
             ObjectError validationError = new ObjectError("globalError", err);

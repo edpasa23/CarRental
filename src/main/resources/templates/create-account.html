@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add User</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header th:replace="layout/base-template :: header"/>
+<h2>[[#{add-account.title}]]</h2>
+<a th:href="@{/}">[[#{action.back}]]</a>
+<br/>
+<form th:action="@{/signUp}" method="post" th:object="${user}">
+    <input type="hidden" name="userId" th:field="*{userId}"/>
+    <br/>
+    <label for="username">[[#{user.username}]]:</label>
+    <input type="text" name="username"th:field="*{username}"/>
+    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
+    <br/>
+    <label for="password">[[#{user.password}]]:</label>
+    <input type="password" name="password"th:field="*{password}"/>
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</span>
+    <br/>
+    <label for="name">[[#{user.name}]]:</label>
+    <input type="text" name="name"th:field="*{name}"/>
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+    <br/>
+    <label for="lastName">[[#{user.last-name}]]:</label>
+    <input type="text" name="lastName" th:field="*{lastName}"/>
+    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
+    <br/>
+    <label for="address">[[#{user.address}]]:</label>
+    <input type="text" name="address" th:field="*{address}"/>
+    <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</span>
+    <br/>
+    <label for="city">[[#{user.city}]]:</label>
+    <input type="text" name="city" th:field="*{city}"/>
+    <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</span>
+    <br/>
+    <label for="phone">[[#{user.phone}]]:</label>
+    <input type="tel" name="phone" th:field="*{phone}"/>
+    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</span>
+    <br/>
+    <label for="email">[[#{user.email}]]:</label>
+    <input type="text" name="email"  th:field="*{email}"/>
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+    <br/>
+    <div th:if="${#fields.hasErrors('global')}">
+        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+    </div>
+    <br/>
+    <input type="submit" name="signUp" value="Sign up"/>
+</form>
+
+</body>
+</html>

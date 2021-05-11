@@ -19,29 +19,31 @@ public class UserValidationServiceImpl implements UserValidationService {
     @Override
     public String validateUser(User user){
 
-        Long id = null;
+        Long id = user.getUserId();
+        User x = null;
 
         //verifica si existe el usuario
-        User x = userRepository.findById(user.getUserId()).orElse((null));
+        if(id != null) {
+            x = userRepository.findById(user.getUserId()).orElse((null));
+        }
 
-        if(!x.equals(null)){
+        if(x != null){
             id = userService.findUserById(user).getUserId();
         }
 
         String message = "";
-        if(userService.findUserByEmail(user) != null
-                && userService.findUserByPhone(user) != null
-                && !id.equals(userService.findUserByEmail(user).getUserId())
-                && !id.equals(userService.findUserByPhone(user).getUserId())) {
-            message = "Phone and Email already exist";
+
+        if(userService.findUserByPhone(user) != null
+                && id != userService.findUserByPhone(user).getUserId()) {
+            message = message + " *Phone already exist";
         }
-        else if(userService.findUserByPhone(user) != null
-                && !id.equals(userService.findUserByPhone(user).getUserId())) {
-            message = "Phone already exist";
+        if(userService.findUserByEmail(user) != null &&
+                id != userService.findUserByEmail(user).getUserId()) {
+            message = message + " *Email already exist";
         }
-        else if(userService.findUserByEmail(user) != null &&
-                !id.equals(userService.findUserByEmail(user).getUserId())) {
-            message = "Email already exist";
+        if(userService.findUserByUsername(user) != null &&
+                id != userService.findUserByUsername(user).getUserId()) {
+            message = message + " *Username already exist";
         }
         return message;
     }

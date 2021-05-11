@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -30,12 +31,6 @@ public class User implements Serializable {
     @NotEmpty(message = "*Please provide a password")
     @Column(name = "password")
     private String password;
-/*
-
-    @NotEmpty(message = "*Please provide a password")
-    @Column(name = "passwordConfirm")
-    private String passwordConfirm;
-*/
 
     @NotEmpty
     @Column
@@ -65,11 +60,18 @@ public class User implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private Set<Role> role;
+    private List<Role> role;
 
     /*
     @OneToOne
     @JoinColumn(name = "user_id")
     private Set<Booking> booking;*/
+
+    /*
+    @NotEmpty(message = "*Please provide a password")
+    @Column(name = "passwordConfirm")
+    private String passwordConfirm;
+*/
+
 
 }

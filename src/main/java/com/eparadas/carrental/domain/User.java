@@ -1,6 +1,8 @@
 package com.eparadas.carrental.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
@@ -15,9 +17,15 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @Table(name = "user")
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    public User(String username){
+        this.username = username;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

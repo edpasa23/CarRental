@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/base-template :: head">
+    <meta charset="UTF-8">
+    <title>Correct Booking</title>
+</head>
+
+<body>
+
+<header th:replace="layout/base-template :: header"></header>
+<br/>
+<blockquote class="blockquote text-center">
+    <h1>!Correct booking!</h1>
+</blockquote>
+
+<section th:fragment="add-booking" class="py-4 mb-4 bg-transparent">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <a th:href="@{/carsList}" class="btn btn-dark btn-block">
+                    <i class="fas fa-plus"></i> [[#{action.back-cars}]]
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="layout/base-template :: footer"/>
+
+</body>
+</html>

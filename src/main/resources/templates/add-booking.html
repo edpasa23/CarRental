@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/base-template :: head">
+    <meta charset="UTF-8">
+    <title>Add Booking</title>
+</head>
+<body>
+<header th:replace="layout/base-template :: header"/>
+<h2>[[#{add-booking.title}]]</h2>
+<a th:href="@{/carsList}">[[#{action.back}]]</a>
+<br/>
+<form class="needs-validation" novalidate th:action="@{/saveBooking}" method="post" th:object="${booking}">
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <input type="hidden" name="rentId" th:field="*{rentId}"/>
+            <input type="hidden" name="vehicleId" th:field="*{vehicleId}"/>
+            <input type="hidden" name="userId" th:field="*{userId}"/>
+            <label for="username">[[#{booking.username}]]</label>
+            <input type="text" name="username" th:field="*{username}" class="form-control" id="usernameToValidation"
+                   placeholder="username" required>
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="rentFrom">[[#{booking.rent-from}]]</label>
+            <input type="date" name="brand" th:field="*{rentFrom}" class="form-control" id="rentFromValidation"
+                   placeholder="rentFrom" required>
+            <span th:if="${#fields.hasErrors('rentFrom')}" th:errors="*{rentFrom}">Rent From Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="rentTo">[[#{booking.rent-to }]]</label>
+            <input type="date" name="rentTo" th:field="*{rentTo}" class="form-control" id="rentToValidation"
+                   placeholder="rentTo" required>
+            <span th:if="${#fields.hasErrors('rentTo')}" th:errors="*{rentTo}">Rent To Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <input type="submit" name="registerBooking" value="Register booking"/>
+</form>
+<footer th:replace="layout/base-template :: footer"/>
+</body>
+</html>

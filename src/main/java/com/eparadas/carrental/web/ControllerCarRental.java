@@ -1,8 +1,10 @@
 package com.eparadas.carrental.web;
 
 
+import com.eparadas.carrental.domain.Booking;
 import com.eparadas.carrental.domain.User;
 import com.eparadas.carrental.domain.Vehicle;
+import com.eparadas.carrental.service.BookingService;
 import com.eparadas.carrental.service.UserService;
 import com.eparadas.carrental.service.UserValidationService;
 import com.eparadas.carrental.service.VehicleService;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -27,6 +30,9 @@ public class ControllerCarRental {
 
     @Autowired
     private VehicleService vehicleService;
+
+    @Autowired
+    private BookingService bookingService;
 
     @Autowired
     private UserValidationService userValidationService;
@@ -121,9 +127,10 @@ public class ControllerCarRental {
     @GetMapping("/editCar")
     public String editCar(Vehicle vehicle,Model model){
         vehicle = vehicleService.findVehicleById(vehicle);
-        model.addAttribute("vehicle", vehicle);
+        model.addAttribute("vehicle",vehicle);
         return "edit-car";
     }
+
 
     @PostMapping("/registerCar")
     public String registerCar(@Valid Vehicle vehicle, BindingResult result, Errors error) {
@@ -166,6 +173,8 @@ public class ControllerCarRental {
         model.addAttribute("carsList",vehicles);
         return "cars-list";
     }
+
+
 
     @GetMapping("/orderPriceOrderDesc")
     public String findPriceDesc(Model model){
@@ -243,5 +252,35 @@ public class ControllerCarRental {
         model.addAttribute("carsList",vehicles);
         return "cars-list";
     }
+
+    //***************BOOKING METHODS CARS***********
+
+    @GetMapping("/addBooking")
+    public String addBooking(Booking booking){
+        return "add-booking";
+    }
+
+    @PostMapping("/saveBooking")
+    public String saveBooking(@Valid Booking booking, BindingResult result, Errors error) {
+
+        if (error.hasErrors()) {
+            System.out.println(error.toString());
+            return "add-booking";
+        }
+
+        User user = new User(booking.getUsername());
+        booking.setUserId(userService.findUserByUsername(user).getUserId());
+
+        Vehicle vehicle = new Vehicle(booking.getVehicleId());
+        int price = vehicleService.findVehicleById(vehicle).getRentPrice();
+
+        LocalDate m = booking.getRentTo();
+        int i = m.compareTo(booking.getRentFrom());
+        booking.setPrice(price*i);
+
+        bookingService.save(booking);
+        return "correct-booking";
+    }
+
 
 }

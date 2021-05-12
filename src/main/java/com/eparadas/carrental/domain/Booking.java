@@ -1,11 +1,13 @@
 package com.eparadas.carrental.domain;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
+import java.time.LocalDate;
 
 
 @Data
@@ -20,16 +22,28 @@ public class Booking implements Serializable {
     @Column(name = "rent_id")
     private Long rentId;
 
+    @NotNull
+    @Column(name = "vehicle_id")
+    private Long vehicleId;
+
+    @Column(name = "user_id")
+    private Long userId;
+
     @NotEmpty
+    @Column(name = "username")
+    private String username;
+
+    @NotNull
     @Column(name = "rent_from")
-    private String rentFrom;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate rentFrom;
 
-    @NotEmpty
+    @NotNull
     @Column(name = "rent_to")
-    private String rentTo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate rentTo;
 
-    @NotEmpty
     @Column(name = "price")
-    private String price;
+    private int price;
 
 }

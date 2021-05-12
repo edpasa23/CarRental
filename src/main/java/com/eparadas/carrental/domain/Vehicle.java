@@ -15,6 +15,23 @@ public class Vehicle implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public Vehicle(Long id){
+        this.vehicleId = id;
+    }
+
+    public Vehicle() {
+    }
+
+    public Vehicle(Long vehicleId, @NotEmpty String brand, @NotEmpty String model, @NotEmpty String colour, @NotEmpty String vehicleType, @NotEmpty String transmission, @NotNull int rentPrice) {
+        this.vehicleId = vehicleId;
+        this.brand = brand;
+        this.model = model;
+        this.colour = colour;
+        this.vehicleType = vehicleType;
+        this.transmission = transmission;
+        this.rentPrice = rentPrice;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vehicle_id")
@@ -42,7 +59,7 @@ public class Vehicle implements Serializable {
 
     @NotNull
     @Column(name = "rent_price")
-    private double rentPrice;
+    private int rentPrice;
 
 
 /*    @OneToOne

@@ -10,44 +10,74 @@
 <h2>[[#{modify-add.title}]]</h2>
 <a th:href="@{/usersList}">[[#{action.back}]]</a>
 <br/>
-<form th:action="@{/saveUser}" method="post" th:object="${user}">
-    <input type="hidden" name="userId" th:field="*{userId}"/>
-    <br/>
-    <input type="hidden" name="username" th:field="*{username}"/>
-    <br/>
-    <input type="hidden" name="password" th:field="*{password }"/>
-    <br/>
-    <label for="name">[[#{user.name}]]:</label>
-    <input type="text" name="name"th:field="*{name}"/>
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
-    <br/>
-    <label for="lastName">[[#{user.last-name}]]:</label>
-    <input type="text" name="lastName" th:field="*{lastName}"/>
-    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
-    <br/>
-    <label for="address">[[#{user.address}]]:</label>
-    <input type="text" name="address" th:field="*{address}"/>
-    <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</span>
-    <br/>
-    <label for="city">[[#{user.city}]]:</label>
-    <input type="text" name="city" th:field="*{city}"/>
-    <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</span>
-    <br/>
-    <label for="phone">[[#{user.phone}]]:</label>
-    <input type="tel" name="phone" th:field="*{phone}"/>
-    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</span>
-    <br/>
-    <label for="email">[[#{user.email}]]:</label>
-    <input type="text" name="email"  th:field="*{email}"/>
-    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
-    <br/>
+<form class="needs-validation" novalidate th:action="@{/saveUser}" method="post" th:object="${user}">
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <input type="hidden" name="userId" th:field="*{userId}"/>
+            <input type="hidden" name="username" th:field="*{username}"/>
+            <input type="hidden" name="password" th:field="*{password}"/>
+            <label for="name">[[#{user.name}]]</label>
+            <input type="text" name="name" th:field="*{name}" class="form-control" id="nameValidation"
+                   placeholder="Name" required>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="lastName">[[#{user.last-name}]]</label>
+            <input type="text" name="lastName" th:field="*{lastName}" class="form-control" id="lastNameValidation"
+                   placeholder="LastName" required>
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="address">[[#{user.address}]]</label>
+            <input type="text" name="address" th:field="*{address}" class="form-control" id="addressValidation"
+                   placeholder="Address" required>
+            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="city">[[#{user.city}]]</label>
+            <input type="text" name="city" th:field="*{city}" class="form-control" id="cityValidation"
+                   placeholder="City" required>
+            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="phone">[[#{user.phone}]]</label>
+            <input type="text" name="phone" th:field="*{phone}" class="form-control" id="phoneValidation"
+                   placeholder="Phone" required>
+            <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="email">[[#{user.email}]]</label>
+            <input type="text" name="email" th:field="*{email}" class="form-control" id="emailValidation"
+                   placeholder="Email" required>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{address}">Email Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+    </div>
     <div th:if="${#fields.hasErrors('global')}">
         <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
     </div>
-    <input type="submit" name="saveUser" value="Save"/>
+    <br/>
+    <input type="submit" name="Save" value="Save"/>
 </form>
-
 <footer th:replace="layout/base-template :: footer"/>
-
 </body>
 </html>

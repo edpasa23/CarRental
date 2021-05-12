@@ -11,6 +11,8 @@ public interface UserService {
 
     public void delete(User user);
 
+    public void register(User user);
+
     public User findUserById(User user);
 
     public User findUserByEmail(User user);
@@ -19,7 +21,6 @@ public interface UserService {
 
     public User findUserByUsername(User user);
 
-    public void register(User user);
 
 
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/base-template :: head">
+    <meta charset="UTF-8">
+    <title>Edit Vehicle</title>
+</head>
+<body>
+<header th:replace="layout/base-template :: header"/>
+<h2>[[#{add-car.title}]]</h2>
+<a th:href="@{/}">[[#{action.back}]]</a>
+<br/>
+<form class="needs-validation" novalidate th:action="@{/saveCar}" method="post" th:object="${vehicle}">
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <input type="hidden" name="vehicleId" th:field="*{vehicleId}"/>
+            <label for="brand">[[#{car.brand}]]</label>
+            <input type="text" name="brand" th:field="*{brand}" class="form-control" id="brandValidation"
+                   placeholder="Brand" required>
+            <span th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="model">[[#{car.model}]]</label>
+            <input type="text" name="model" th:field="*{model}" class="form-control" id="modelValidation"
+                   placeholder="Password" required>
+            <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="colour">[[#{car.colour}]]</label>
+            <input type="text" name="colour" th:field="*{colour}" class="form-control" id="colourValidation"
+                   placeholder="Colour" required>
+            <span th:if="${#fields.hasErrors('colour')}" th:errors="*{colour}">Colour Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="vehicleType">[[#{car.type}]]</label>
+            <input type="text" name="vehicleType" th:field="*{vehicleType}" class="form-control" id="vehicleTypeValidation"
+                   placeholder="VehicleType" required>
+            <span th:if="${#fields.hasErrors('vehicleType')}" th:errors="*{vehicleType}">Vehicle Type Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="transmission">[[#{car.transmission}]]</label>
+            <input type="text" name="transmission" th:field="*{transmission}" class="form-control" id="transmissionValidation"
+                   placeholder="Transmission" required>
+            <span th:if="${#fields.hasErrors('transmission')}" th:errors="*{transmission}">Transmission Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="rentPrice">[[#{car.price}]]</label>
+            <input type="text" name="rentPrice" th:field="*{rentPrice}" class="form-control" id="rentPriceValidation"
+                   placeholder="rentPrice" required>
+            <span th:if="${#fields.hasErrors('rentPrice')}" th:errors="*{rentPrice}">Rent Price Error</span>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <input type="submit" name="saveCar" value="Save"/>
+</form>
+<footer th:replace="layout/base-template :: footer"/>
+</body>
+</html>

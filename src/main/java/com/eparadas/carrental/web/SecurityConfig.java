@@ -30,23 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-/*    @Override
-    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws  Exception {
-        authenticationManagerBuilder.inMemoryAuthentication()
-                .withUser("admin")
-                    .password("{noop}123")
-                    .roles("ADMIN", "USER")
-                .and()
-                    .withUser("user")
-                    .password("{noop}123")
-                .roles("USER");
-    }*/
-
     //restringe las urls de la aplicacion segun el rol
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/editUser/**","/addUser/**","/deleteUser")
+                .antMatchers("/editUser/**","/addUser/**","/deleteUser","/addCar/**")
                     .hasRole("ADMIN")
                 .antMatchers("/")
                     .hasAnyRole("USER","ADMIN")

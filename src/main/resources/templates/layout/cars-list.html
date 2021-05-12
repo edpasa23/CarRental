@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Cars List</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<section th:fragment="cars-list" id="vehicles">
+    <div class="container">
+        <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" th:href="@{/orderBrandOrderAsc}">Brand &#8593;</a>
+                <a class="dropdown-item" th:href="@{/orderBrandOrderDesc}">Brand &#8595;</a>
+                <a class="dropdown-item" th:href="@{/orderModelOrderAsc}">Model &#8593;</a>
+                <a class="dropdown-item" th:href="@{/orderModelOrderDesc}">Model &#8595;</a>
+                <a class="dropdown-item" th:href="@{/orderColourOrderAsc}">Colour &#8593;</a>
+                <a class="dropdown-item" th:href="@{/orderColourOrderDesc}">Colour &#8595;</a>
+                <a class="dropdown-item" th:href="@{/orderTypeOrderAsc}">Type &#8593;</a>
+                <a class="dropdown-item" th:href="@{/orderTypeOrderDesc}">Type &#8595;</a>
+                <a class="dropdown-item" th:href="@{/orderTransmissionOrderAsc}">Transmission &#8593;</a>
+                <a class="dropdown-item" th:href="@{/orderTransmissionOrderDesc}">Transmission &#8595;</a>
+                <a class="dropdown-item" th:href="@{/orderPriceOrderAsc}">Price &#8593;</a>
+                <a class="dropdown-item" th:href="@{/orderPriceOrderDesc}">Price &#8595;</a>
+
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-11">
+                <div class="card">
+                    <div class="card-header">
+                        <blockquote class="blockquote text-center">
+                            <h4>[[#{cars.list}]]</h4>
+                        </blockquote>
+                    </div>
+                    <div th:if="${carsList != null and !carsList.empty}">
+                        <table class="table table-stryped">
+                            <thead class="thead-dark">
+                            <tr>
+
+                                <th>#</th>
+                                <th th:text="#{car.brand}">Brand</th>
+                                <th th:text="#{car.model}">Model</th>
+                                <th th:text="#{car.colour}">Colour</th>
+                                <th th:text="#{car.type}">Type</th>
+                                <th th:text="#{car.transmission}">Transmission</th>
+                                <th th:text="#{car.price}">Price</th>
+
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="vehicle, counter : ${carsList}">
+                                <td>[[${counter.count}]]</td>
+                                <td>[[${vehicle.brand}]]</td>
+                                <td>[[${vehicle.model}]]</td>
+                                <td>[[${vehicle.colour}]]</td>
+                                <td>[[${vehicle.vehicleType}]]</td>
+                                <td>[[${vehicle.transmission}]]</td>
+                                <td>[[${vehicle.rentPrice}]]</td>
+                                <td>
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editCar(vehicleId=${vehicle.vehicleId})}"
+                                       class="btn btn-secondary">
+                                        <i class="fas fa-angle-double-right"></i> [[#{action.edit}]]
+                                    </a>
+                                </td>
+                                <td>
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/deleteCar(vehicleId=${vehicle.vehicleId})}"
+                                       class="btn btn-dark">
+                                        <i class="fas fa-trash"></i> [[' ' + #{action.delete}]]
+                                    </a>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center p-2" th:if="${carsList == null or carsList.empty}">
+                        <span th:text="#{vehicle.empty-list}">Empty List</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

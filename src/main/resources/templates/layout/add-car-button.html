@@ -5,16 +5,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Add-Client-Button</title>
+    <title>Add-Car-Button</title>
 </head>
 <body>
-<section th:fragment="add-client-button" class="py-4 mb-4 bg-transparent">
+<section th:fragment="add-car-button" class="py-4 mb-4 bg-transparent">
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a th:href="@{/addUser}" class="btn btn-dark btn-block">
-                        <i class="fas fa-plus"></i> [[#{action.add-client}]]
+                    <a th:href="@{/addCar}" class="btn btn-dark btn-block">
+                        <i class="fas fa-plus"></i> [[#{action.add-car}]]
                     </a>
                 </div>
             </div>

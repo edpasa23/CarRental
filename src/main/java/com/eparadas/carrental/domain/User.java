@@ -50,7 +50,6 @@ public class User implements Serializable {
 
     @NotEmpty
     @Column(unique = true,name = "phone")
-    @NumberFormat
     private String phone;
 
     @NotEmpty

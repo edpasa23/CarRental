@@ -1,26 +1,24 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org.org"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="layout/base-template :: head">
-    <title>Cars Rental</title>
     <meta charset="UTF-8">
+    <title>Cars List</title>
 </head>
-
 <body>
 
 <header th:replace="layout/base-template :: header"/>
+<section th:replace="layout/add-car-button :: add-car-button"></section>
+<section th:replace="layout/cars-list :: cars-list"></section>
 
-<div align="center">
-    <h1>¡Welcome  <span sec:authentication="name">User</span>! </h1>
-    <a th:href="@{/usersList}">[[#{user.list}]]</a>
-    <br/>
-    <a th:href="@{/carsList}">[[#{car.list}]]</a>
-</div>
+<br/>
+<a th:href="@{/}">[[#{action.back}]]</a>
+<br/>
 
 <footer th:replace="layout/base-template :: footer"/>
 
 </body>
-
 </html>

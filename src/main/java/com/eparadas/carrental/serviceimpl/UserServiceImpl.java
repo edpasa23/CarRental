@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
-    //Methods for Login
+    //*****************Method for Login**********************
 
     @Override
     @Transactional(readOnly = true)
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
-    //
+    //******************************************************
 
     @Override
     @Transactional(readOnly = true)
@@ -62,7 +62,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public void save(User user) {
+
+        User aux = userRepository.findByUsername(user.getUsername());
+        user.setRole(aux.getRole());
+
         userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void delete(User user) {
+        userRepository.delete(user);
     }
 
     @Override
@@ -86,16 +96,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    @Transactional
-    public void delete(User user) {
-        userRepository.delete(user);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public User findUserById(User user) {
         return userRepository.findById(user.getUserId()).orElse((null));
     }
+
     @Override
     @Transactional(readOnly = true)
     public User findUserByEmail(User user) {

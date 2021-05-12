@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -28,10 +29,6 @@ public class Vehicle implements Serializable {
     private String model;
 
     @NotEmpty
-    @Column(name = "no_of_seats")
-    private String noOfSeats;
-
-    @NotEmpty
     @Column(name = "colour")
     private String colour;
 
@@ -43,13 +40,10 @@ public class Vehicle implements Serializable {
     @Column(name = "transmission")
     private String transmission;
 
-    @NotEmpty
+    @NotNull
     @Column(name = "rent_price")
-    private String rentPrice;
+    private double rentPrice;
 
-    @NotEmpty
-    @Column(name = "availability")
-    private Boolean availability;
 
 /*    @OneToOne
     @JoinColumn(name = "vehicle_id")

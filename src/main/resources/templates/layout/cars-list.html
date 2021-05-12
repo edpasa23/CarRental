@@ -17,30 +17,49 @@
 <section th:fragment="cars-list" id="vehicles">
 
     <div class="container">
-        <form>
         <div class="input-group">
-                <input class="form-control rounded" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-dark" type="submit"><i class="fas fa-search"></i></button>
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                   aria-describedby="search-addon" />
+            <span class="input-group-text border-0" id="search-addon">
+                <i class="fas fa-search"></i>
+            </span>
         </div>
-        </form>
+
         <br/>
-        <div class="dropdown">
-            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" th:href="@{/orderBrandOrderAsc}">Brand &#8593;</a>
-                <a class="dropdown-item" th:href="@{/orderBrandOrderDesc}">Brand &#8595;</a>
-                <a class="dropdown-item" th:href="@{/orderModelOrderAsc}">Model &#8593;</a>
-                <a class="dropdown-item" th:href="@{/orderModelOrderDesc}">Model &#8595;</a>
-                <a class="dropdown-item" th:href="@{/orderColourOrderAsc}">Colour &#8593;</a>
-                <a class="dropdown-item" th:href="@{/orderColourOrderDesc}">Colour &#8595;</a>
-                <a class="dropdown-item" th:href="@{/orderTypeOrderAsc}">Type &#8593;</a>
-                <a class="dropdown-item" th:href="@{/orderTypeOrderDesc}">Type &#8595;</a>
-                <a class="dropdown-item" th:href="@{/orderTransmissionOrderAsc}">Transmission &#8593;</a>
-                <a class="dropdown-item" th:href="@{/orderTransmissionOrderDesc}">Transmission &#8595;</a>
-                <a class="dropdown-item" th:href="@{/orderPriceOrderAsc}">Price &#8593;</a>
-                <a class="dropdown-item" th:href="@{/orderPriceOrderDesc}">Price &#8595;</a>
+        <div class="row">
+            <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Order By
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <a class="dropdown-item" th:href="@{/orderBrandOrderAsc}">Brand &#8593;</a>
+                    <a class="dropdown-item" th:href="@{/orderBrandOrderDesc}">Brand &#8595;</a>
+                    <a class="dropdown-item" th:href="@{/orderModelOrderAsc}">Model &#8593;</a>
+                    <a class="dropdown-item" th:href="@{/orderModelOrderDesc}">Model &#8595;</a>
+                    <a class="dropdown-item" th:href="@{/orderColourOrderAsc}">Colour &#8593;</a>
+                    <a class="dropdown-item" th:href="@{/orderColourOrderDesc}">Colour &#8595;</a>
+                    <a class="dropdown-item" th:href="@{/orderTypeOrderAsc}">Type &#8593;</a>
+                    <a class="dropdown-item" th:href="@{/orderTypeOrderDesc}">Type &#8595;</a>
+                    <a class="dropdown-item" th:href="@{/orderTransmissionOrderAsc}">Transmission &#8593;</a>
+                    <a class="dropdown-item" th:href="@{/orderTransmissionOrderDesc}">Transmission &#8595;</a>
+                    <a class="dropdown-item" th:href="@{/orderPriceOrderAsc}">Price &#8593;</a>
+                    <a class="dropdown-item" th:href="@{/orderPriceOrderDesc}">Price &#8595;</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton2"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter by type
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <a class="dropdown-item" th:href="@{/filterByMidSize}">Mid-size</a>
+                    <a class="dropdown-item" th:href="@{/filterByMidLuxury}">Mid-size luxury</a>
+                    <a class="dropdown-item" th:href="@{/filterByLuxuryCompact}">Luxury compact</a>
+                    <a class="dropdown-item" th:href="@{/filterByFullSize}">Full Size</a>
+                    <a class="dropdown-item" th:href="@{/filterBySport}">Sport</a>
+                    <a class="dropdown-item" th:href="@{/filterByCrossSUV}">Crossover SUV</a>
+                </div>
             </div>
         </div>
         <br/>
@@ -96,7 +115,6 @@
                                         <i class="fas fa-angle-double-right"></i> [[#{action.book}]]
                                     </a>
                                 </td>
-
                             </tr>
                             </tbody>
                         </table>

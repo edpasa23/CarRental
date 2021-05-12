@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/base-template :: head">
+    <meta charset="UTF-8">
+    <title>Booked List</title>
+</head>
+<body>
+
+<header th:replace="layout/base-template :: header"/>
+
+
+<br/>
+<a th:href="@{/}">[[#{action.back}]]</a>
+<br/>
+
+<body>
+
+<section th:fragment="cars-list" id="vehicles">
+
+    <div class="container">
+        <br/>
+        <div class="row">
+            <div class="col-md-11">
+                <div class="card">
+                    <div class="card-header">
+                        <blockquote class="blockquote text-center">
+                            <h4>[[#{booked.search }]]</h4>
+                        </blockquote>
+                    </div>
+                    <div th:if="${bookingList != null and !bookingList.empty}">
+                        <table class="table table-stryped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th th:text="#{booking.rentId}">rentId</th>
+                                <th th:text="#{booking.vehicleId}">vehicleId</th>
+                                <th th:text="#{booking.userId}">userId</th>
+                                <th th:text="#{booking.rentFrom}">rentFrom</th>
+                                <th th:text="#{booking.rentTo}">rentTo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="booking, counter : ${bookingList}">
+                                <td>[[${counter.count}]]</td>
+                                <td>[[${booking.rentId}]]</td>
+                                <td>[[${booking.vehicleId}]]</td>
+                                <td>[[${booking.userId}]]</td>
+                                <td>[[${booking.rentFrom}]]</td>
+                                <td>[[${booking.rentTo}]]</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center p-2" th:if="${bookingList == null or bookingList.empty}">
+                        <span th:text="#{booking.empty-list}">Empty List</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+<footer th:replace="layout/base-template :: footer"/>
+
+</body>
+</html>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -253,6 +254,90 @@ public class ControllerCarRental {
         return "cars-list";
     }
 
+    @GetMapping("/filterByMidSize")
+    public String filterByMidSize(Model model){
+        List<Vehicle> aux = vehicleService.listAll();
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        for(Vehicle x:aux){
+            if(x.getVehicleType().equals("Mid-size")){
+                vehicles.add(x);
+            }
+        }
+        model.addAttribute("carsList",vehicles);
+        return "cars-list";
+    }
+
+    @GetMapping("/filterByMidLuxury")
+    public String filterByMidLuxury(Model model){
+        List<Vehicle> aux = vehicleService.listAll();
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        for(Vehicle x:aux){
+            if(x.getVehicleType().equals("Mid-size luxury ")){
+                vehicles.add(x);
+            }
+        }
+        model.addAttribute("carsList",vehicles);
+        return "cars-list";
+    }
+
+    @GetMapping("/filterByLuxuryCompact")
+    public String filterByLuxuryCompact(Model model){
+        List<Vehicle> aux = vehicleService.listAll();
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        for(Vehicle x:aux){
+            if(x.getVehicleType().equals("Luxury compact")){
+                vehicles.add(x);
+            }
+        }
+        model.addAttribute("carsList",vehicles);
+        return "cars-list";
+    }
+
+    @GetMapping("/filterByFullSize")
+    public String filterByFullSize(Model model){
+        List<Vehicle> aux = vehicleService.listAll();
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        for(Vehicle x:aux){
+            if(x.getVehicleType().equals("Full Size")){
+                vehicles.add(x);
+            }
+        }
+        model.addAttribute("carsList",vehicles);
+        return "cars-list";
+    }
+
+    @GetMapping("/filterBySport")
+    public String filterBySport(Model model){
+        List<Vehicle> aux = vehicleService.listAll();
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        for(Vehicle x:aux){
+            if(x.getVehicleType().equals("Sport")){
+                vehicles.add(x);
+            }
+        }
+        model.addAttribute("carsList",vehicles);
+        return "cars-list";
+    }
+
+    @GetMapping("/filterByCrossSUV")
+    public String filterByCrossSUV(Model model){
+        List<Vehicle> aux = vehicleService.listAll();
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        for(Vehicle x:aux){
+            if(x.getVehicleType().equals("Crossover SUV")){
+                vehicles.add(x);
+            }
+        }
+        model.addAttribute("carsList",vehicles);
+        return "cars-list";
+    }
+
     //***************BOOKING METHODS CARS***********
 
     @GetMapping("/addBooking")
@@ -280,6 +365,13 @@ public class ControllerCarRental {
 
         bookingService.save(booking);
         return "correct-booking";
+    }
+
+    @GetMapping("/bookedList")
+    public String bookedList(Model model){
+        List<Booking> bookingList = bookingService.findAll();
+        model.addAttribute("bookingList",bookingList);
+        return "booked-list";
     }
 
 

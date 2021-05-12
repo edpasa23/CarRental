@@ -12,14 +12,34 @@
 
 <header th:replace="layout/base-template :: header"/>
 
-<div align="center">
-    <h1>¡Welcome  <span sec:authentication="name">User</span>! </h1>
-    <a th:href="@{/usersList}">[[#{user.list}]]</a>
-    <br/>
-    <a th:href="@{/carsList}">[[#{car.list}]]</a>
-    <br/>
-    <a th:href="@{/bookedList}">[[#{booked.search}]]</a>
-</div>
+<section th:fragment="add-booking" class="py-4 mb-4 bg-transparent">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/usersList}" class="btn btn-dark btn-block">
+                    <i class="fas fa-user-circle"></i> [[#{user.list}]]
+                </a>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <a th:href="@{/carsList}" class="btn btn-dark btn-block">
+                    <i class="fas fa-car"></i> [[#{car.list}]]
+                </a>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <a th:href="@{/bookedList}" class="btn btn-dark btn-block">
+                    <i class="fas fa-list-ol"></i> [[#{booked.search}]]
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <footer th:replace="layout/base-template :: footer"/>
 

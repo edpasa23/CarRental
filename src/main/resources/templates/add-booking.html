@@ -44,6 +44,10 @@
         </div>
     </div>
 
+    <div th:if="${#fields.hasErrors('global')}">
+        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+    </div>
+
     <br/>
     <input type="submit" name="registerBooking" value="Register booking"/>
 </form>

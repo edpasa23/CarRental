@@ -1,6 +1,7 @@
 package com.eparadas.carrental.serviceimpl;
 
 import com.eparadas.carrental.domain.Booking;
+import com.eparadas.carrental.domain.Vehicle;
 import com.eparadas.carrental.repository.BookingRepository;
 import com.eparadas.carrental.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,12 @@ public class BookingServiceImpl implements BookingService {
     public Booking findReservation(Booking booking){
         return bookingRepository.findById(booking.getRentId()).orElse(null);
     }
+
+    @Override
+    public List<Booking> findAllByVehicleId(Booking booking) {
+        List<Booking> bookingList = bookingRepository.findAllByVehicleId(booking.getVehicleId());
+        return bookingList;
+    }
+
 
 }

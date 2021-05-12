@@ -14,4 +14,6 @@ public interface BookingService {
 
     public Booking findReservation(Booking booking);
 
+    public List<Booking> findAllByVehicleId(Booking booking);
+
 }

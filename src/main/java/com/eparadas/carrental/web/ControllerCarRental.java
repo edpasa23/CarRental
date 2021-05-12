@@ -4,10 +4,7 @@ package com.eparadas.carrental.web;
 import com.eparadas.carrental.domain.Booking;
 import com.eparadas.carrental.domain.User;
 import com.eparadas.carrental.domain.Vehicle;
-import com.eparadas.carrental.service.BookingService;
-import com.eparadas.carrental.service.UserService;
-import com.eparadas.carrental.service.UserValidationService;
-import com.eparadas.carrental.service.VehicleService;
+import com.eparadas.carrental.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +31,9 @@ public class ControllerCarRental {
 
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private BookingValidationService bookingValidationService;
 
     @Autowired
     private UserValidationService userValidationService;
@@ -345,9 +345,21 @@ public class ControllerCarRental {
         return "add-booking";
     }
 
+    @GetMapping("/deleteBooking")
+    public String deleteBooking(Booking booking){
+        bookingService.delete(booking);
+        return "redirect:/bookedList";
+    }
+
     @PostMapping("/saveBooking")
     public String saveBooking(@Valid Booking booking, BindingResult result, Errors error) {
 
+        String err = bookingValidationService.validateBooking(booking);
+
+        if (!err.isEmpty()) {
+            ObjectError validationError = new ObjectError("globalError", err);
+            result.addError(validationError);
+        }
         if (error.hasErrors()) {
             System.out.println(error.toString());
             return "add-booking";

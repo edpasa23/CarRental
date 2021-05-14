@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -42,8 +43,8 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     @Transactional(readOnly = true)
-    public Vehicle findVehicleById(Vehicle vehicle) {
-        return vehicleRepository.findById(vehicle.getVehicleId()).orElse((null));
+    public Optional<Vehicle> findVehicleById(Long vehicleId) {
+        return vehicleRepository.findById(vehicleId);
     }
 
     @Override

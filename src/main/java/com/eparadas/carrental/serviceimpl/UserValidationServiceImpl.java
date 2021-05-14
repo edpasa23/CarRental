@@ -7,6 +7,8 @@ import com.eparadas.carrental.service.UserValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserValidationServiceImpl implements UserValidationService {
 
@@ -28,21 +30,24 @@ public class UserValidationServiceImpl implements UserValidationService {
         }
 
         if(x != null){
-            id = userService.findUserById(user).getUserId();
+            Optional<User> aux = userService.findUserById(user.getUserId());
+            if(aux.isPresent()){
+                id = aux.get().getUserId();
+            }
         }
 
         String message = "";
 
-        if(userService.findUserByPhone(user) != null
-                && id != userService.findUserByPhone(user).getUserId()) {
+        if(userService.findUserByPhone(user.getPhone()) != null
+                && id != (userService.findUserByPhone(user.getPhone()).getUserId())) {
             message = message + " *Phone already exist";
         }
-        if(userService.findUserByEmail(user) != null &&
-                id != userService.findUserByEmail(user).getUserId()) {
+        if(userService.findUserByEmail(user.getEmail()) != null &&
+                id != (userService.findUserByEmail(user.getEmail()).getUserId())) {
             message = message + " *Email already exist";
         }
-        if(userService.findUserByUsername(user) != null &&
-                id != userService.findUserByUsername(user).getUserId()) {
+        if(userService.findUserByUsername(user.getUsername()) != null &&
+                id != (userService.findUserByUsername(user.getUsername()).getUserId())) {
             message = message + " *Username already exist";
         }
         return message;

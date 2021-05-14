@@ -2,6 +2,7 @@ package com.eparadas.carrental.service;
 import com.eparadas.carrental.domain.Vehicle;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface VehicleService {
 
@@ -13,7 +14,7 @@ public interface VehicleService {
 
     public void delete(Vehicle vehicle);
 
-    public Vehicle findVehicleById(Vehicle vehicle);
+    public Optional<Vehicle> findVehicleById(Long vehicleId);
 
     public List<Vehicle> findAllByRentPriceOrderByAsc();
 

@@ -2,6 +2,7 @@ package com.eparadas.carrental.service;
 
 import com.eparadas.carrental.domain.User;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -13,13 +14,13 @@ public interface UserService {
 
     public void register(User user);
 
-    public User findUserById(User user);
+    public Optional<User> findUserById(Long userId);
 
-    public User findUserByEmail(User user);
+    public User findUserByEmail(String email);
 
-    public User findUserByPhone(User user);
+    public User findUserByPhone(String phone);
 
-    public User findUserByUsername(User user);
+    public User findUserByUsername(String username);
 
 
 

@@ -41,8 +41,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> findAllByVehicleId(Booking booking) {
-        List<Booking> bookingList = bookingRepository.findAllByVehicleId(booking.getVehicleId());
+    public List<Booking> findAllByVehicleId(Long vehicleId) {
+        List<Booking> bookingList = bookingRepository.findAllByVehicleId(vehicleId);
         return bookingList;
     }
 

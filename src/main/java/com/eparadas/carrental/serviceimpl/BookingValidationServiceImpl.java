@@ -2,11 +2,9 @@ package com.eparadas.carrental.serviceimpl;
 
 import com.eparadas.carrental.domain.Booking;
 import com.eparadas.carrental.domain.User;
-import com.eparadas.carrental.domain.Vehicle;
 import com.eparadas.carrental.service.BookingService;
 import com.eparadas.carrental.service.BookingValidationService;
 import com.eparadas.carrental.service.UserService;
-import com.eparadas.carrental.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +24,7 @@ public class BookingValidationServiceImpl implements BookingValidationService {
     public String validateBooking(Booking booking) {
 
         User user = new User(booking.getUsername());
-        user = userService.findUserByUsername(user); //busca que exista
+        user = userService.findUserByUsername(user.getUsername()); //busca que exista
         String message = "";
 
         if(user == null){
@@ -47,7 +45,7 @@ public class BookingValidationServiceImpl implements BookingValidationService {
             message = message + " *Not valid rent dates";
         }
 
-        List<Booking> bookings = bookingService.findAllByVehicleId(booking);
+        List<Booking> bookings = bookingService.findAllByVehicleId(booking.getVehicleId());
 
         for(Booking x: bookings){
             if(from.isAfter(x.getRentFrom()) && from.isBefore(x.getRentTo())){

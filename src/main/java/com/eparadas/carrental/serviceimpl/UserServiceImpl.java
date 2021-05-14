@@ -92,33 +92,32 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         roles.add(roleAux);
         user.setRole(roles);
         userRepository.save(user);
-
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User findUserById(User user) {
-        return userRepository.findById(user.getUserId()).orElse((null));
+    public Optional<User> findUserById(Long userId) {
+        return userRepository.findById(userId);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User findUserByEmail(User user) {
-        User userAux = userRepository.findByEmail(user.getEmail());
+    public User findUserByEmail(String email) {
+        User userAux = userRepository.findByEmail(email);
         return userAux;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User findUserByPhone(User user) {
-        User userAux = userRepository.findByPhone(user.getPhone());
+    public User findUserByPhone(String phone) {
+        User userAux = userRepository.findByPhone(phone);
         return userAux;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User findUserByUsername(User user) {
-        User userAux = userRepository.findByUsername(user.getUsername());
+    public User findUserByUsername(String username) {
+        User userAux = userRepository.findByUsername(username);
         return userAux;
     }
 

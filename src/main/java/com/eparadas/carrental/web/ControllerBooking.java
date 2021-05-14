@@ -8,6 +8,10 @@ import com.eparadas.carrental.service.BookingValidationService;
 import com.eparadas.carrental.service.UserService;
 import com.eparadas.carrental.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -20,6 +24,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Controller
 public class ControllerBooking {
 
     @Autowired
@@ -46,7 +51,7 @@ public class ControllerBooking {
     }
 
     @PostMapping("/saveBooking")
-    public String saveBooking(@Valid Booking booking, BindingResult result, Errors error) {
+    public String saveBooking(@Valid Booking booking, BindingResult result, Errors error, Model model) {
 
         String err = bookingValidationService.validateBooking(booking);
 
@@ -59,10 +64,12 @@ public class ControllerBooking {
             return "add-booking";
         }
 
-        User user = new User(booking.getUsername());
         int price=0;
-
-        booking.setUserId(userService.findUserByUsername(user.getUsername()).getUserId());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            booking.setUserId(userService.findUserByUsername(currentUserName).getUserId());
+        }
 
         Vehicle vehicle = new Vehicle(booking.getVehicleId());
         Optional<Vehicle> aux = vehicleService.findVehicleById(vehicle.getVehicleId());
@@ -76,6 +83,9 @@ public class ControllerBooking {
         booking.setPrice(price*i);
 
         bookingService.save(booking);
+
+        model.addAttribute("rentId",booking.getRentId());
+
         return "correct-booking";
     }
 
@@ -85,5 +95,22 @@ public class ControllerBooking {
         model.addAttribute("bookingList",bookingList);
         return "booked-list";
     }
+
+    @GetMapping("/bookedByUser")
+    public String bookedByUser(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long id = null;
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            id = (userService.findUserByUsername(currentUserName)).getUserId();
+        }
+        List<Booking> bookingList = bookingService.findAllByUserId(id);
+        model.addAttribute("bookingList",bookingList);
+        return "booked-by-list";
+
+
+    }
+
 
 }

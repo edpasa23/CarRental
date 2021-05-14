@@ -6,38 +6,38 @@ import java.util.Optional;
 
 public interface VehicleService {
 
-    public List<Vehicle> listAll();
+    List<Vehicle> listAll();
 
-    public void save(Vehicle vehicle);
+    void save(Vehicle vehicle);
 
-    public void register(Vehicle vehicle);
+    void register(Vehicle vehicle);
 
-    public void delete(Vehicle vehicle);
+    void delete(Vehicle vehicle);
 
-    public Optional<Vehicle> findVehicleById(Long vehicleId);
+    Optional<Vehicle> findVehicleById(Long vehicleId);
 
-    public List<Vehicle> findAllByRentPriceOrderByAsc();
+    List<Vehicle> findAllByRentPriceOrderByAsc();
 
-    public List<Vehicle> findAllByRentPriceOrderByDesc();
+    List<Vehicle> findAllByRentPriceOrderByDesc();
 
-    public List<Vehicle> findAllByBrandOrderByAsc();
+    List<Vehicle> findAllByBrandOrderByAsc();
 
-    public List<Vehicle> findAllByBrandOrderByDesc();
+    List<Vehicle> findAllByBrandOrderByDesc();
 
-    public List<Vehicle> findAllByModelOrderByAsc();
+    List<Vehicle> findAllByModelOrderByAsc();
 
-    public List<Vehicle> findAllByModelOrderByDesc();
+    List<Vehicle> findAllByModelOrderByDesc();
 
-    public List<Vehicle> findAllByTypeOrderByAsc();
+    List<Vehicle> findAllByTypeOrderByAsc();
 
-    public List<Vehicle> findAllByTypeOrderByDesc();
+    List<Vehicle> findAllByTypeOrderByDesc();
 
-    public List<Vehicle> findAllByColourOrderByAsc();
+    List<Vehicle> findAllByColourOrderByAsc();
 
-    public List<Vehicle> findAllByColourOrderByDesc();
+    List<Vehicle> findAllByColourOrderByDesc();
 
-    public List<Vehicle> findAllByTransmissionOrderByAsc();
+    List<Vehicle> findAllByTransmissionOrderByAsc();
 
-    public List<Vehicle> findAllByTransmissionOrderByDesc();
+    List<Vehicle> findAllByTransmissionOrderByDesc();
 
 }

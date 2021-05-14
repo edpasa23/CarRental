@@ -10,28 +10,28 @@ import java.util.List;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
 
-    public List<Vehicle> findAllByOrderByRentPriceAsc();
+    List<Vehicle> findAllByOrderByRentPriceAsc();
 
-    public List<Vehicle> findAllByOrderByRentPriceDesc();
+    List<Vehicle> findAllByOrderByRentPriceDesc();
 
-    public List<Vehicle> findAllByOrderByBrandAsc();
+    List<Vehicle> findAllByOrderByBrandAsc();
 
-    public List<Vehicle> findAllByOrderByBrandDesc();
+    List<Vehicle> findAllByOrderByBrandDesc();
 
-    public List<Vehicle> findAllByOrderByModelAsc();
+    List<Vehicle> findAllByOrderByModelAsc();
 
-    public List<Vehicle> findAllByOrderByModelDesc();
+    List<Vehicle> findAllByOrderByModelDesc();
 
-    public List<Vehicle> findAllByOrderByVehicleTypeAsc();
+    List<Vehicle> findAllByOrderByVehicleTypeAsc();
 
-    public List<Vehicle> findAllByOrderByVehicleTypeDesc();
+    List<Vehicle> findAllByOrderByVehicleTypeDesc();
 
-    public List<Vehicle> findAllByOrderByColourAsc();
+    List<Vehicle> findAllByOrderByColourAsc();
 
-    public List<Vehicle> findAllByOrderByColourDesc();
+    List<Vehicle> findAllByOrderByColourDesc();
 
-    public List<Vehicle> findAllByOrderByTransmissionAsc();
+    List<Vehicle> findAllByOrderByTransmissionAsc();
 
-    public List<Vehicle> findAllByOrderByTransmissionDesc();
+    List<Vehicle> findAllByOrderByTransmissionDesc();
 
 }

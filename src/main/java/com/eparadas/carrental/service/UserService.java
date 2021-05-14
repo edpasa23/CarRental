@@ -6,21 +6,21 @@ import java.util.Optional;
 
 public interface UserService {
 
-    public List<User> listAll();
+    List<User> listAll();
 
-    public void save(User user);
+    void save(User user);
 
-    public void delete(User user);
+    void delete(User user);
 
-    public void register(User user);
+    void register(User user);
 
-    public Optional<User> findUserById(Long userId);
+    Optional<User> findUserById(Long userId);
 
-    public User findUserByEmail(String email);
+    User findUserByEmail(String email);
 
-    public User findUserByPhone(String phone);
+    User findUserByPhone(String phone);
 
-    public User findUserByUsername(String username);
+    User findUserByUsername(String username);
 
 
 

@@ -4,6 +4,6 @@ import com.eparadas.carrental.domain.Booking;
 
 public interface BookingValidationService {
 
-    public String validateBooking (Booking booking);
+    String validateBooking (Booking booking);
 
 }

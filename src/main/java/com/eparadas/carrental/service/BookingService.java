@@ -6,14 +6,16 @@ import java.util.List;
 
 public interface BookingService {
 
-    public List<Booking> findAll();
+    List<Booking> findAll();
 
-    public void save(Booking reservation);
+    void save(Booking reservation);
 
-    public void delete(Booking reservation);
+    void delete(Booking reservation);
 
-    public Booking findReservation(Booking booking);
+    Booking findReservation(Booking booking);
 
-    public List<Booking> findAllByVehicleId(Long vehicleId);
+    List<Booking> findAllByVehicleId(Long vehicleId);
+
+    List<Booking> findAllByUserId(Long vehicleId);
 
 }

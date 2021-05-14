@@ -29,10 +29,6 @@ public class Booking implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
-    @NotEmpty
-    @Column(name = "username")
-    private String username;
-
     @NotNull
     @Column(name = "rent_from")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

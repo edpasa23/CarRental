@@ -23,13 +23,8 @@ public class BookingValidationServiceImpl implements BookingValidationService {
     @Override
     public String validateBooking(Booking booking) {
 
-        User user = new User(booking.getUsername());
-        user = userService.findUserByUsername(user.getUsername()); //busca que exista
         String message = "";
 
-        if(user == null){
-            message = message + " *User doesn't exist";
-        }
 
         LocalDate todaysdate = LocalDate.now();
         LocalDate from = booking.getRentFrom();

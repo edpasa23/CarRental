@@ -37,6 +37,17 @@ public class ControllerVehicles {
         return "edit-car";
     }
 
+    @PostMapping("/saveCar")
+    public String saveCar(@Valid Vehicle vehicle, BindingResult result, Errors error) {
+
+        if (error.hasErrors()) {
+            System.out.println(error.toString());
+            return "edit-car";
+        }
+        vehicleService.save(vehicle);
+        return "redirect:/carsList";
+    }
+
     @PostMapping("/registerCar")
     public String registerCar(@Valid Vehicle vehicle, BindingResult result, Errors error) {
 
@@ -52,16 +63,7 @@ public class ControllerVehicles {
         return "add-car";
     }
 
-    @PostMapping("/saveCar")
-    public String saveCar(@Valid Vehicle vehicle, BindingResult result, Errors error) {
 
-        if (error.hasErrors()) {
-            System.out.println(error.toString());
-            return "edit-car";
-        }
-        vehicleService.save(vehicle);
-        return "redirect:/carsList";
-    }
 
     @GetMapping("/carsList")
     public String viewCars(Model model){

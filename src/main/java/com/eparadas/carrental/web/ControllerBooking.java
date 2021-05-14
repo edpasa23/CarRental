@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -96,6 +97,14 @@ public class ControllerBooking {
         return "booked-list";
     }
 
+    @PostMapping("/bookedByUser")
+    public String bookedByUser(@ModelAttribute("rentId") Long rentId, Model model){
+        List<Booking> bookingList = bookingService.findAllByRentId(rentId);
+        model.addAttribute("bookingList",bookingList);
+        System.out.println("\n\n"+bookingList.toString());
+        return "booked-by-list";
+    }
+
     @GetMapping("/bookedByUser")
     public String bookedByUser(Model model){
 
@@ -108,8 +117,6 @@ public class ControllerBooking {
         List<Booking> bookingList = bookingService.findAllByUserId(id);
         model.addAttribute("bookingList",bookingList);
         return "booked-by-list";
-
-
     }
 
 

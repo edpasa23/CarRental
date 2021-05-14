@@ -21,6 +21,15 @@
 <section th:fragment="cars-list" id="vehicles">
 
     <div class="container">
+        <div class="col-md-3">
+            <div><h3>Reservation Number Search</h3></div>
+            <form method="post" th:action="@{/bookedByUser}" th:object="${String}">
+                <input type="text" id="rentId" name="rentId" />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <br/>
         <br/>
         <div class="row">
             <div class="col-md-11">

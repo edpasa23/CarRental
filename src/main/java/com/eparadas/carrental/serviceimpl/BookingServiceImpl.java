@@ -52,5 +52,17 @@ public class BookingServiceImpl implements BookingService {
         return bookingList;
     }
 
+    @Override
+    public List<Booking> findAllByRentId(Long rentId) {
+        List<Booking> bookingList = bookingRepository.findAllByRentId(rentId);
+        return bookingList;
+    }
+
+    @Override
+    public Booking findByRentId(Long rentId) {
+        Booking booking = bookingRepository.findByRentId(rentId);
+        return booking;
+    }
+
 
 }

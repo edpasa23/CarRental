@@ -16,6 +16,10 @@ public interface BookingService {
 
     List<Booking> findAllByVehicleId(Long vehicleId);
 
-    List<Booking> findAllByUserId(Long vehicleId);
+    List<Booking> findAllByUserId(Long userId);
+
+    List<Booking> findAllByRentId(Long rentId);
+
+    Booking findByRentId(Long rentId);
 
 }

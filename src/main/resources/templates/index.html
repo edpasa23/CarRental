@@ -32,7 +32,7 @@
         <br/>
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <a th:href="@{/bookedList}" class="btn btn-dark btn-block">
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/bookedList}" class="btn btn-dark btn-block">
                     <i class="fas fa-list-ol"></i> [[#{booked.search}]]
                 </a>
             </div>
